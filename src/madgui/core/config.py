@@ -17,8 +17,8 @@ from madgui.util import yaml
 
 
 user_home = os.path.expanduser('~')
-user_config_path = os.path.join(user_home, '.config', 'madgui', 'config.yml')
-user_session_path = os.path.join(user_home, '.config', 'madgui', 'session.yml')
+user_config_path = os.path.join(user_home, '.config', 'madgui', 'configCSR.yml')
+user_session_path = os.path.join(user_home, '.config', 'madgui', 'sessionCSR.yml')
 
 
 def update_recursive(a, b):
