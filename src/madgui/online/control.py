@@ -102,8 +102,10 @@ class Control:
 
     def get_knobs(self):
         """Get dict of lowercase name → :class:`ParamInfo`."""
+
         if not self.model():
             return {}
+
         return {
             knob: info
             for knob in self.model().export_globals()
@@ -128,10 +130,12 @@ class Control:
         from madgui.online.dialogs import SyncParamItem
         from madgui.widget.dialog import Dialog
         model, live = self.model(), self.backend
+
         widget.data = [
             SyncParamItem(info, live.read_param(name), model.read_param(name))
             for name, info in self.get_knobs().items()
         ]
+
         widget.data_key = 'acs_parameters'
         dialog = Dialog(self.session.window())
         dialog.setExportWidget(widget, self.session.folder)
@@ -293,10 +297,14 @@ class MonitorReadout:
     def __init__(self, name, values):
         self.name = name
         self.data = values
-        self.posx = posx = values.get('posx')
-        self.posy = posy = values.get('posy')
-        self.envx = envx = values.get('envx')
-        self.envy = envy = values.get('envy')
+        #self.posx = posx = values.get('posx')
+        #self.posy = posy = values.get('posy')
+        #self.envx = envx = values.get('envx')
+        #self.envy = envy = values.get('envy')
+        self.posx = posx = 0.
+        self.posy = posy = 0.
+        self.envx = envx = 1.e-3
+        self.envy = envy = 1.e-3
         self.valid = (envx is not None and envx > 0 and
                       envy is not None and envy > 0 and
                       not np.isclose(posx, -9.999) and
