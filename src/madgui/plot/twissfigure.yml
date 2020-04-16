@@ -120,25 +120,6 @@ graphs:
       - [twiss, s, ex, '$\varepsilon_x$', *X]
       - [twiss, s, ey, '$\varepsilon_y$', *Y]
 
-  survey_position:
-    title: "Survey: Element Position in global coordinate system"
-    curves:
-      - [survey, s, x, '$x$', *X]
-      - [survey, s, y, '$y$', *Y]
-      - [survey, s, z, '$z$', *Z]
-  survey_rotation:
-    title: "Survey: Rotation angles of local coordinate system"
-    curves:
-      - [survey, s, theta, '$\theta$', *X]
-      - [survey, s, phi, '$\phi$', *Y]
-      - [survey, s, psi, '$\psi$', *Z]
-
-  sector_kick_orbit:
-    title: "Sectormap: Kicks Orbit"
-    curves:
-      - [sector, pos, k1, '$K_1$ (x)', *X]
-      - [sector, pos, k3, '$K_3$ (y)', *Y]
-      - [sector, pos, k5, '$K_3$ (t)', *Y]
   sector_kick_momentum:
     title: "Sectormap: Kicks Momentum"
     curves:
