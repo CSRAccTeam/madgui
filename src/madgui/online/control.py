@@ -177,10 +177,15 @@ class Control:
 
     def on_read_beam(self):
         # TODO: add confirmation dialog
+        self.beam_widget()
         self.read_beam()
 
     def read_beam(self):
         self.model().update_beam(self.backend.get_beam())
+
+    def beam_widget(self):
+        from madgui.online.dialogs import ImportParamWidget
+        self._show_sync_dialog(ImportParamWidget(), self.read_all)
 
     def read_monitor(self, name):
         return self.backend.read_monitor(name)
