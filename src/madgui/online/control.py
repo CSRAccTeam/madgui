@@ -134,6 +134,7 @@ class Control:
         widget.data = [
             SyncParamItem(info, live.read_param(name), model.read_param(name))
             for name, info in self.get_knobs().items()
+            if live.read_param(name) != -9999.
         ]
 
         widget.data_key = 'acs_parameters'
