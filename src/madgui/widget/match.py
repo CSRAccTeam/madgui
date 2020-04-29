@@ -23,6 +23,14 @@ from cpymad.util import PARAM_TYPE_CONSTRAINT
 
 Button = QDialogButtonBox
 
+initCons = [
+    Constraint('csr_mitte', 21.71, 'alfx', 0.),
+    Constraint('csr_mitte', 21.71, 'alfy', 0.),
+    Constraint('csr_mitte', 21.71, 'betx', 12.45),
+    Constraint('csr_mitte', 21.71, 'bety', 1.468),
+]
+
+initVars = ['qd43','qd42','qd41','qd33']
 
 def parse_knob(model, text):
     if ':' in text:
@@ -60,6 +68,8 @@ class MatchWidget(QWidget):
         self.matcher = matcher
         self.control = control
         self.model = model = matcher.model
+        self.set_init_constraints()
+        self.set_init_vars()
         local_constraints = ['envx', 'envy'] + [
             cmdpar.name
             for cmdpar in model.madx.command.constraint.cmdpar.values()
@@ -72,6 +82,24 @@ class MatchWidget(QWidget):
         self.set_initial_values()
         self.connect_signals()
 
+    def set_init_constraints(self):
+        """
+        User defined initial constraints
+        """
+        for c in initCons:
+            el = self.model.elements[c.elem]
+            pos = el.position + el.length
+            self.matcher.constraints.append(
+                Constraint(el, pos, c.axis, c.value))
+
+    def set_init_vars(self):
+        """
+        User defined initial knobs
+        """
+        for e in initVars:
+            elem  = self.model.elements[e]
+            knobi = self.model.get_elem_knobs(elem)
+            self.matcher.variables.append(knobi[0])
     # columns
 
     def cons_items(self, i, c) -> ("Element", "Name", "Target", "Unit"):
