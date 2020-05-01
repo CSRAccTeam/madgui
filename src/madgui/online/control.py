@@ -150,6 +150,7 @@ class Control:
         self.model().write_params([
             (knob, live.read_param(knob))
             for knob in knobs or self.get_knobs()
+            if live.read_param(knob) != -9999.
         ], "Read params from online control")
 
     def write_all(self, knobs=None):
